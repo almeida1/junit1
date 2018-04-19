@@ -31,6 +31,7 @@ public class UC01RegistraEmprestimoDeLivro {
 		usuario.setRa("11111");
 		usuario.setNome("Jose da Silva");
 		servico = new ServicoEmprestimo();
+		emprestimo = new Emprestimo();
 	}
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
@@ -66,11 +67,18 @@ public class UC01RegistraEmprestimoDeLivro {
 	public void CT05UC01FB_registrar_emprestimo_com_data_invalida() {
 		assertFalse(emprestimo.validaData("30-03-2000"));
 	}
+	@Test
+	public void CT06UC01FB_registrar_emprestimo_com_data_valida() {
+		assertTrue(emprestimo.validaData("19/04/2018"));
+	}
 	@Test(expected=RuntimeException.class)
-	public void CT06UC01FB_registrar_emprestimo_com_livro_invalido_null() {
+	public void CT07UC01FB_registrar_emprestimo_com_livro_invalido_null() {
 		emprestimo.setLivro(null);
 	}
-	
+	@Test(expected=RuntimeException.class)
+	public void CT08UC01FB_registrar_emprestimo_com_data_invalida() {
+		emprestimo.setDataEmprestimo("19-04-2018");
+	}
 	
 	
 	
